@@ -1,0 +1,6 @@
+{
+  "generator-android-jhi": {
+    "packageName": "com.greengrowapps.shoppinglistapp",
+    "appName": "Shopping List"
+  }
+}
