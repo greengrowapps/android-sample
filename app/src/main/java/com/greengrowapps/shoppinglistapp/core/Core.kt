@@ -1,7 +1,11 @@
 package com.greengrowapps.shoppinglistapp.core
 
+import android.content.Context
 import android.util.Log
 import android.content.SharedPreferences
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
 import com.greengrowapps.ggarest.GgaRest
 import com.greengrowapps.ggarest.serialization.Serializer
 import com.greengrowapps.jhiusers.JhiUsers
@@ -107,6 +111,8 @@ class Core(private val jhiUsers: JhiUsers, private val configuration: CoreConfig
         if(!isFirebaseTokenConnectedWithUser()) {
           connectFirebaseTokenWithUser(it, authToken)
         }
+      }?: run {
+          FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { sendFirebaseToken(it.token) }
       }
     }
 
